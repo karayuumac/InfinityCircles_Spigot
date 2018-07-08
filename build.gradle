@@ -2,14 +2,10 @@ group 'com.github.karayuumac'
 version '1.0.0'
 
 buildscript {
-    ext.kotlin_version = '1.2.50'
+    ext.kotlin_version = '1.2.51'
 
     repositories {
         mavenCentral()
-        maven {
-            name = 'sponge'
-            url = 'https://repo.spongepowered.org/maven'
-        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -29,6 +25,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile 'org.jetbrains.exposed:exposed:0.8.5'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 compileKotlin {
@@ -46,6 +43,15 @@ jar {
     }
 }
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
+processResources {
+    filteringCharset = 'UTF-8'
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}
+
 task copyJar(type: Copy){
     from jar
     into "C:\\Users\\karayuu\\Documents\\sponge(1.12.2)\\server\\mods"
@@ -55,3 +61,4 @@ task copyJarMac(type: Copy) {
     from jar
     into "/Users/InfinityCircles/plugins/"
 }
+
