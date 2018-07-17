@@ -1,5 +1,3 @@
 package data.exception
 
-class NoDataContainerFoundException(override val message: String?) : Exception() {
-
-}
+class NoDataContainerFoundException(override val message: String?) : Exception()

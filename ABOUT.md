@@ -5,8 +5,8 @@
 
 ## 各種情報
 - 名称: InfinityCircles
-- プラットフォーム: Minecraft(PC版) ver1.12.1
-- サーバプラットフォーム: SpongeForge
+- プラットフォーム: Minecraft(PC版) ver1.12.2
+- サーバプラットフォーム: Spigot
 - 開発言語: kotlin
 - 開発者: karayuu(1名)
 
