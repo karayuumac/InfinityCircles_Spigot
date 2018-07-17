@@ -1,10 +1,65 @@
 package data
 
+import org.bukkit.entity.Player
+import java.util.*
+
+import data.exception.*
+
 /**
  * Created by karayuu on 2018/07/11
  */
-/*
-object DataSolver {
-
+class DataSolver(val uuid: UUID) {
+    val dataMap = mutableMapOf<Key<*>, DataContainer<*>>()
 }
-*/
+
+fun <E> Player.offer(dataKey: Key<E>, data: E) {
+    val container = this.getDataContainer(dataKey)
+    container.data = data
+}
+
+fun <E> Player.getData(dataKey: Key<E>) : E {
+    val container = this.getDataContainer(dataKey)
+    return container.data
+}
+
+private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
+    val serverDataMap = DataController.dataMap
+    val uuid = this.uniqueId
+    val solver = serverDataMap[uuid] ?:
+    throw NoDataFoundException("No Data can be found in this server.[UUID:$uuid, PlayerName:${this.name}")
+    val container = solver.dataMap[dataKey] ?:
+    throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, PlayerName:${this.name}, DataKey:$dataKey")
+
+    @Suppress("UNCHECKED_CAST")
+    val eContainer = container as DataContainer<E>?
+
+    return eContainer ?:
+            throw NoDataContainerFoundException("No DataContainer can be found in this server.[UUID:${this.uniqueId}, PlayerName:${this.name}")
+}
+
+private fun <E> UUID.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
+    val serverDataMap = DataController.dataMap
+    val uuid = this
+    val solver = serverDataMap[uuid] ?:
+    throw NoDataFoundException("No Data can be found in this server.[UUID:$uuid")
+    val container = solver.dataMap[dataKey] ?:
+    throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, DataKey:$dataKey")
+
+    @Suppress("UNCHECKED_CAST")
+    val eContainer = container as DataContainer<E>?
+
+    val c =  eContainer ?:
+    throw NoDataContainerFoundException("No DataContainer can be found in this server.[UUID:$uuid")
+
+    return c
+}
+
+fun <E> UUID.offer(dataKey: Key<E>, data: E) {
+    val c = this.getDataContainer(dataKey)
+    c.data = data
+}
+
+fun <E> UUID.getData(dataKey: Key<E>) : E {
+    val container = this.getDataContainer(dataKey)
+    return container.data
+}
