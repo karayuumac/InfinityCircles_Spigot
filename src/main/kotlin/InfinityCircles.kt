@@ -1,4 +1,5 @@
 import listener.MenuListener
+import listener.PlayerInteractListener
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -9,6 +10,7 @@ class InfinityCircles : JavaPlugin() {
     override fun onEnable() {
         logger.info("Starting plugin.")
         Bukkit.getPluginManager().registerEvents(MenuListener(), this)
+        Bukkit.getPluginManager().registerEvents(PlayerInteractListener(), this)
 
         logger.info("Stated plugin.")
     }
