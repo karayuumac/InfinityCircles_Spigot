@@ -20,12 +20,17 @@ repositories {
         name = 'exposed-repo'
         url('https://dl.bintray.com/kotlin/exposed/')
     }
+
+    maven {
+        url("https://github.com/dotneet/devneko-kotlin-jdbc/repository")
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile 'org.jetbrains.exposed:exposed:0.8.5'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "net.devneko"
 }
 
 compileKotlin {
