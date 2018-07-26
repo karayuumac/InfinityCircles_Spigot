@@ -1,6 +1,8 @@
 package data
 
+import data.datatype.DataType
+
 /**
  * @author karayuu
  */
-class DataContainer<E>(var data: E)
+data class DataContainer<E>(var data: E, val dataType: DataType) //仮data

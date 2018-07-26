@@ -8,7 +8,7 @@ import data.exception.*
 /**
  * Created by karayuu on 2018/07/11
  */
-class DataSolver(val uuid: UUID) {
+class DataSolver {
     val dataMap = mutableMapOf<Key<*>, DataContainer<*>>()
 }
 
@@ -25,8 +25,10 @@ fun <E> Player.getData(dataKey: Key<E>) : E {
 private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this.uniqueId
-    val solver = serverDataMap[uuid] ?:
-            throw NoDataFoundException("No Data can be found in this server.[UUID:$uuid, PlayerName:${this.name}]")
+    val stack = serverDataMap[uuid] ?:
+            throw NoDataStackFoundException("No DataStack can be found in this server.[UUID:$uuid, PlayerName:${this.name}]")
+    val solver = stack.dataSolvers[dataKey.dataType] ?:
+            throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
             throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, PlayerName:${this.name}, DataKey:$dataKey]")
 
@@ -40,8 +42,10 @@ private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
 private fun <E> UUID.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this
-    val solver = serverDataMap[uuid] ?:
-            throw NoDataFoundException("No Data can be found in this server.[UUID:$uuid]")
+    val stack = serverDataMap[uuid] ?:
+            throw NoDataStackFoundException("No DataStack can be found in this server.[UUID:$uuid]")
+    val solver = stack.dataSolvers[dataKey.dataType] ?:
+        throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
             throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, DataKey:$dataKey]")
 

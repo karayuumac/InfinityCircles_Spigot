@@ -1,5 +1,6 @@
 package data
 
+import data.datatype.DataType
 import java.util.*
 
 /**
@@ -7,13 +8,18 @@ import java.util.*
  */
 
 fun main(args: Array<String>) {
-    val key = Key(DataContainer(1))
+    val key = createKey(1, DataType.TEST)
     val uuid = UUID.randomUUID()
-    val solver = DataSolver(uuid).also {
+    val solver = DataSolver().also {
         it.dataMap[key] = key.dataContainer
     }
-    DataController.dataMap[uuid] = solver
+    val stack = DataStack().also {
+        it.dataSolvers[key.dataType] = solver
+    }
+    DataController.dataMap[uuid] = stack
+
+    println(uuid.getData(key))
 
     uuid.offer(key, 5)
-    print(uuid.getData(key))
+    println(uuid.getData(key))
 }

@@ -1,7 +1,7 @@
 package data
 
-import data.saveType.DataSaveType
-import data.saveType.SQLDataSaveType
+import data.savetype.DataSaveType
+import data.savetype.SQLDataSaveType
 
 /**
  * Created by karayuu on 2018/07/22

@@ -1,4 +1,4 @@
-package data.saveType
+package data.savetype
 
 import data.DataSolver
 import org.bukkit.entity.Player

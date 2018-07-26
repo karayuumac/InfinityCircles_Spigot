@@ -6,6 +6,8 @@ package data.exception
 
 class NoDataContainerFoundException(override val message: String?) : Exception()
 
-class NoDataFoundException(override val message: String?) : Exception()
+class NoDataStackFoundException(override val message: String?) : Exception()
 
 class NoDataKeyFoundException(override val message: String?) : Exception()
+
+class NoDataSolverFoundException(override val message: String?) : Exception()

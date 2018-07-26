@@ -6,8 +6,8 @@ import java.util.*
  * @author karayuu
  */
 object DataController {
-    val dataMap = mutableMapOf<UUID, DataSolver>()
-    val saveType = DataSaveTypes.SQL.type
+    val dataMap = mutableMapOf<UUID, DataStack>()
+    //val saveType = DataSaveTypes.SQL.type
 /*
     fun onPlayerJoin(player: Player) {
         val data = if (isFirstJoin(player)) {
