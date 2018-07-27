@@ -2,6 +2,7 @@ package data.savetype
 
 import data.DataSolver
 import org.bukkit.entity.Player
+import java.sql.Connection
 import java.util.*
 
 /**
@@ -9,6 +10,7 @@ import java.util.*
  */
 object SQLDataSaveType : DataSaveType {
     override fun onPlayerJoin(player: Player) {
+        val uuid = player.uniqueId
 
     }
 
@@ -27,4 +29,8 @@ object SQLDataSaveType : DataSaveType {
     override fun create() {
 
     }
+}
+
+private fun connect() {
+    //val conn = Connection()
 }

@@ -20,10 +20,6 @@ repositories {
         name = 'exposed-repo'
         url('https://dl.bintray.com/kotlin/exposed/')
     }
-
-    maven {
-        url("https://github.com/dotneet/devneko-kotlin-jdbc/repository")
-    }
 }
 
 dependencies {
