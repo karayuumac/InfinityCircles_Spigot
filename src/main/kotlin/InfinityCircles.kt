@@ -22,6 +22,6 @@ class InfinityCircles : JavaPlugin() {
     }
 
     companion object {
-        const val pluginName = "InfinityCircles"
+        val plugin = InfinityCircles()
     }
 }
