@@ -6,6 +6,6 @@ import java.util.*
 /**
  * @author karayuu
  */
-class DataStack {
+class DataStore {
     val dataSolvers  = mutableMapOf<DataType, DataSolver>()
 }

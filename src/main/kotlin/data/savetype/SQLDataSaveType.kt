@@ -8,6 +8,7 @@ import java.util.*
 /**
  * Created by karayuu on 2018/07/22
  */
+/*
 object SQLDataSaveType : DataSaveType {
     override fun onPlayerJoin(player: Player) {
         val uuid = player.uniqueId
@@ -34,3 +35,4 @@ object SQLDataSaveType : DataSaveType {
 private fun connect() {
     //val conn = Connection()
 }
+*/

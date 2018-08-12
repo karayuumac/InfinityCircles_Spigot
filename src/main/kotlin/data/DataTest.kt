@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val solver = DataSolver().also {
         it.dataMap[key] = key.dataContainer
     }
-    val stack = DataStack().also {
+    val stack = DataStore().also {
         it.dataSolvers[key.dataType] = solver
     }
     DataController.dataMap[uuid] = stack

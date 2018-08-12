@@ -1,7 +1,6 @@
 package listener
 
-import org.bukkit.Material
-import org.bukkit.block.Sign
+import listener.component.EventHandlerList
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
@@ -9,16 +8,9 @@ import org.bukkit.event.player.PlayerInteractEvent
 /**
  * @author karayuu
  */
-class PlayerInteractListener : Listener {
-    @EventHandler
-    fun onPlayerClickLandSign(event: PlayerInteractEvent) {
-        val player = event.player
-        if (event.material == Material.SIGN) return
-        val block = event.clickedBlock
-        val sign = block.state as? Sign ?: return
+object PlayerInteractListener : Listener {
+    val behaviorList = EventHandlerList<PlayerInteractEvent>()
 
-        if (sign.getLine(0) == "[Build]") {
-            player.sendMessage("クリック！！")
-        }
-    }
+    @EventHandler
+    fun onEvent(event: PlayerInteractEvent) = behaviorList(event)
 }

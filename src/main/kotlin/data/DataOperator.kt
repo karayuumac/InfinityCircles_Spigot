@@ -24,7 +24,7 @@ private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this.uniqueId
     val stack = serverDataMap[uuid] ?:
-    throw NoDataStackFoundException("No DataStack can be found in this server.[UUID:$uuid, PlayerName:${this.name}]")
+    throw NoDataStackFoundException("No DataStore can be found in this server.[UUID:$uuid, PlayerName:${this.name}]")
     val solver = stack.dataSolvers[dataKey.dataType] ?:
     throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
@@ -41,7 +41,7 @@ private fun <E> UUID.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this
     val stack = serverDataMap[uuid] ?:
-    throw NoDataStackFoundException("No DataStack can be found in this server.[UUID:$uuid]")
+    throw NoDataStackFoundException("No DataStore can be found in this server.[UUID:$uuid]")
     val solver = stack.dataSolvers[dataKey.dataType] ?:
     throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
