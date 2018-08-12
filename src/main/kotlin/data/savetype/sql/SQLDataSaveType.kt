@@ -23,7 +23,7 @@ object SQLDataSaveType : DataSaveType {
     }
 
     override fun load(): Map<UUID, DataSolver> {
-
+        return mutableMapOf()
     }
 
     override fun create() {

@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin
 class InfinityCircles : JavaPlugin() {
     override fun onEnable() {
         logger.info("Starting plugin.")
+        plugin = this
+
         Bukkit.getPluginManager().registerEvents(MenuListener(), this)
         Bukkit.getPluginManager().registerEvents(PlayerInteractListener(), this)
 
@@ -22,6 +24,6 @@ class InfinityCircles : JavaPlugin() {
     }
 
     companion object {
-        val plugin = InfinityCircles()
+        lateinit var plugin: InfinityCircles
     }
 }
