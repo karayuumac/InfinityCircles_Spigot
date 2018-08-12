@@ -1,8 +1,8 @@
-package data.savetype
+package data.savetype.sql
 
 import data.DataSolver
+import data.savetype.DataSaveType
 import org.bukkit.entity.Player
-import java.sql.Connection
 import java.util.*
 
 /**
@@ -24,7 +24,7 @@ object SQLDataSaveType : DataSaveType {
     }
 
     override fun load(): Map<UUID, DataSolver> {
-
+        return mutableMapOf()
     }
 
     override fun create() {

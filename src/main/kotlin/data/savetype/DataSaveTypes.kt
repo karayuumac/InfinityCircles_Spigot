@@ -1,6 +1,5 @@
 package data.savetype
 
-import data.savetype.DataSaveType
 //import data.savetype.SQLDataSaveType
 
 /**
