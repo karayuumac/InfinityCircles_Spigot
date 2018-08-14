@@ -1,3 +1,4 @@
+import config.ConfigurationHandler
 import housing.BuildSign
 import listener.PlayerInteractListener
 import listener.component.ConditionalHandler
@@ -16,6 +17,8 @@ class InfinityCircles : JavaPlugin() {
         plugin = this
 
         logger.info("Starting plugin.")
+
+        /* Register events */
         Bukkit.getPluginManager().registerEvents(PlayerInteractListener, this)
 
         val sendMessageOnLeftClick = ConditionalHandler<PlayerInteractEvent>(
@@ -30,6 +33,10 @@ class InfinityCircles : JavaPlugin() {
         PlayerInteractListener.behaviorList += openMenuOnLeftClickWithStick
 
         BuildSign.eventRegister()
+
+        /* Register Config */
+        ConfigurationHandler.register()
+
         logger.info("Stated plugin.")
     }
 

@@ -8,7 +8,7 @@ import java.io.File
 /**
  * Created by karayuu on 2018/08/11
  */
-abstract class abstractConfigurationYml(name: String = "") {
+abstract class AbstractConfigurationYml(name: String = "") {
     private val fileName = if (name.isEmpty()) javaClass.simpleName.removePrefix("Yml") + ".yml" else "$name.yml"
 
     private val file = File(plugin.dataFolder, fileName)
@@ -27,5 +27,10 @@ abstract class abstractConfigurationYml(name: String = "") {
 
     private fun load() {
         fc = YamlConfiguration.loadConfiguration(file)
+    }
+
+    fun register() {
+        makeConfig()
+        load()
     }
 }

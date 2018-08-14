@@ -7,5 +7,5 @@ import java.util.*
  * @author karayuu
  */
 class DataStore {
-    val dataSolvers  = mutableMapOf<DataType, DataSolver>()
+    val dataSolvers  = mutableListOf<DataSolver>()
 }

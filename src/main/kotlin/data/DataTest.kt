@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
         it.dataMap[key] = key.dataContainer
     }
     val stack = DataStore().also {
-        it.dataSolvers[key.dataType] = solver
+        it.dataSolvers += solver
     }
     DataController.dataMap[uuid] = stack
 

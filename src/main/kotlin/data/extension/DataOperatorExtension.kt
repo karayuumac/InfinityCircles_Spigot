@@ -1,8 +1,6 @@
 package data.extension
 
-import data.DataContainer
-import data.DataController
-import data.Key
+import data.*
 import data.exception.NoDataContainerFoundException
 import data.exception.NoDataKeyFoundException
 import data.exception.NoDataSolverFoundException
@@ -26,9 +24,9 @@ fun <E> Player.getData(dataKey: Key<E>) : E {
 private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this.uniqueId
-    val stack = serverDataMap[uuid] ?:
+    val store = serverDataMap[uuid] ?:
     throw NoDataStackFoundException("No DataStore can be found in this server.[UUID:$uuid, PlayerName:${this.name}]")
-    val solver = stack.dataSolvers[dataKey.dataType] ?:
+    val solver = store.getSolver(dataKey) ?:
     throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
     throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, PlayerName:${this.name}, DataKey:$dataKey]")
@@ -43,9 +41,9 @@ private fun <E> Player.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
 private fun <E> UUID.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     val serverDataMap = DataController.dataMap
     val uuid = this
-    val stack = serverDataMap[uuid] ?:
+    val store = serverDataMap[uuid] ?:
     throw NoDataStackFoundException("No DataStore can be found in this server.[UUID:$uuid]")
-    val solver = stack.dataSolvers[dataKey.dataType] ?:
+    val solver = store.getSolver(dataKey) ?:
     throw NoDataSolverFoundException("No DataSolver can be found in this server.[UUID:$uuid, DataType:${dataKey.dataType.name}")
     val container = solver.dataMap[dataKey] ?:
     throw NoDataKeyFoundException("No DataKey can be found in this server.[UUID:$uuid, DataKey:$dataKey]")
@@ -57,6 +55,15 @@ private fun <E> UUID.getDataContainer(dataKey: Key<E>) : DataContainer<E> {
     throw NoDataContainerFoundException("No DataContainer can be found in this server.[UUID:$uuid]")
 
     return c
+}
+
+private fun DataStore.getSolver(key: Key<*>): DataSolver? {
+    for (solver in this.dataSolvers) {
+        if (solver.dataMap.containsKey(key)) {
+            return solver
+        }
+    }
+    return null
 }
 
 fun <E> UUID.offer(dataKey: Key<E>, data: E) {

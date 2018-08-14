@@ -1,0 +1,16 @@
+# Define database settings.
+
+# Enter a server name that MySQL is working like "localhost".
+serverName: "localhost"
+
+# Enter a port that MySQL is working like 3306.
+port: 3306
+
+# Enter a database name that contains this plugin's data.
+databaseName: "InfinityCircles"
+
+# Enter a username that the MySQL user is using.
+username: root
+
+# Enter a password that the MySQL user is using.
+password: ""
